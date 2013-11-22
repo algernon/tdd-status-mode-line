@@ -19,6 +19,17 @@ simply requiring it is all you need. The package adds the TDD status
 to `mode-line-misc-info`, you need to have that in your mode-line for
 the package to work.
 
+The package is also available from [Marmalade](http://marmalade-repo.org/):
+
+```lisp
+(require 'package)
+(add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
+(package-initialize)
+(package-install 'tdd-status-mode-line)
+
+(require 'tdd-status-mode-line)
+```
+
 Usage
 -----
 
