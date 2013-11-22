@@ -27,6 +27,7 @@
 
 (require 'custom)
 (require 'cus-face)
+(require 'ert)
 
 ;; Customisation groups
 
@@ -89,7 +90,9 @@ available states."
 
   (if (>= tdd-status/current-status-index (1- (length tdd-status/states)))
       (setq tdd-status/current-status-index 0)
-    (incf tdd-status/current-status-index)))
+    (incf tdd-status/current-status-index))
+  (force-mode-line-update)
+  tdd-status/current-status-index)
 
 (defun tdd-status/back ()
   "Step back in the TDD status."
@@ -97,13 +100,17 @@ available states."
 
   (if (<= tdd-status/current-status-index 0)
       (setq tdd-status/current-status-index (1- (length tdd-status/states)))
-    (decf tdd-status/current-status-index)))
+    (decf tdd-status/current-status-index))
+  (force-mode-line-update)
+  tdd-status/current-status-index)
 
 (defun tdd-status/clear ()
   "Clear the TDD status."
   (interactive)
 
-  (setq tdd-status/current-status-index -1))
+  (setq tdd-status/current-status-index -1)
+  (force-mode-line-update)
+  tdd-status/current-status-index)
 
 (defun tdd-status/make-local ()
   (interactive)
@@ -124,6 +131,36 @@ available states."
     (setq tdd-status-map map)))
 
 (define-key global-map (kbd "C-x t") tdd-status-map)
+
+;; Tests
+
+(ert-deftest test-tdd-status/advance ()
+  "Tests that tdd-status/advance functions correctly."
+
+  ;; Start with a clean slate
+  (setq tdd-status/current-status-index -1)
+
+  (should (= (tdd-status/advance) 0))
+  (should (= (tdd-status/advance) 1))
+  (should (= (tdd-status/advance) 2))
+  (should (= (tdd-status/advance) 0)))
+
+(ert-deftest test-tdd-status/back ()
+  "Tests that tdd-status/back functions correctly."
+
+  ;; Start with a clean slate
+  (setq tdd-status/current-status-index -1)
+  (should (= (tdd-status/back) 2))
+  (should (= (tdd-status/back) 1))
+  (should (= (tdd-status/back) 0))
+  (should (= (tdd-status/back) 2)))
+
+(ert-deftest test-tdd-status/clear ()
+  "Tests that tdd-status/clear functions properly."
+
+  ;; Start with an unclean state
+  (setq tdd-status/current-status-index 1)
+  (should (= (tdd-status/clear) -1)))
 
 ;; Setup code
 
