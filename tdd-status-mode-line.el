@@ -124,6 +124,6 @@ available states."
 
 (add-to-list 'mode-line-misc-info '(:eval (tdd-status-info-update)))
 
-(provide 'tdd-status-mode)
+(provide 'tdd-status-mode-line)
 
 ;;; tdd-status-mode-line.el ends here
