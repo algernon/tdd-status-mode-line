@@ -113,14 +113,12 @@ available states."
 
 (unless tdd-status-map
   (let ((map (make-sparse-keymap)))
-    (define-key map (kbd "C-x t n") 'tdd-status-advance)
-    (define-key map (kbd "C-x t c") 'tdd-status-clear)
-    (define-key map (kbd "C-x t p") 'tdd-status-back)
+    (define-key map (kbd "n") 'tdd-status-advance)
+    (define-key map (kbd "p") 'tdd-status-back)
+    (define-key map (kbd "c") 'tdd-status-clear)
     (setq tdd-status-map map)))
 
-(define-key global-map (kbd "C-x t c") 'tdd-status-clear)
-(define-key global-map (kbd "C-x t n") 'tdd-status-advance)
-(define-key global-map (kbd "C-x t p") 'tdd-status-back)
+(define-key global-map (kbd "C-x t") tdd-status-map)
 
 ;; Setup code
 
