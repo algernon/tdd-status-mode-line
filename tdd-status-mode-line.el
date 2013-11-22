@@ -70,7 +70,7 @@
 
 ;; Implementation
 
-(defvar tdd-status/current-status-index 0
+(defvar tdd-status/current-status-index -1
   "Index of the current TDD status state.")
 
 (defun tdd-status-info-update ()
