@@ -73,7 +73,7 @@
 (defvar tdd-status/current-status-index -1
   "Index of the current TDD status state.")
 
-(defun tdd-status-info-update ()
+(defun tdd-status/info-update ()
   "Update the TDD status info, based on the current index and
 available states."
 
@@ -84,7 +84,7 @@ available states."
                 'face (second (nth tdd-status/current-status-index
                                    tdd-status/states)))))
 
-(defun tdd-status-advance ()
+(defun tdd-status/advance ()
   "Advance the TDD status further."
   (interactive)
 
@@ -92,7 +92,7 @@ available states."
       (setq tdd-status/current-status-index 0)
     (incf tdd-status/current-status-index)))
 
-(defun tdd-status-back ()
+(defun tdd-status/back ()
   "Step back in the TDD status."
   (interactive)
 
@@ -100,13 +100,13 @@ available states."
       (setq tdd-status/current-status-index (1- (length tdd-status/states)))
     (decf tdd-status/current-status-index)))
 
-(defun tdd-status-clear ()
+(defun tdd-status/clear ()
   "Clear the TDD status."
   (interactive)
 
   (setq tdd-status/current-status-index -1))
 
-(defun tdd-status-make-local ()
+(defun tdd-status/make-local ()
   (interactive)
   "Make the TDD status buffer-local."
 
@@ -119,16 +119,16 @@ available states."
 
 (unless tdd-status-map
   (let ((map (make-sparse-keymap)))
-    (define-key map (kbd "n") 'tdd-status-advance)
-    (define-key map (kbd "p") 'tdd-status-back)
-    (define-key map (kbd "c") 'tdd-status-clear)
+    (define-key map (kbd "n") 'tdd-status/advance)
+    (define-key map (kbd "p") 'tdd-status/back)
+    (define-key map (kbd "c") 'tdd-status/clear)
     (setq tdd-status-map map)))
 
 (define-key global-map (kbd "C-x t") tdd-status-map)
 
 ;; Setup code
 
-(add-to-list 'mode-line-misc-info '(:eval (tdd-status-info-update)))
+(add-to-list 'mode-line-misc-info '(:eval (tdd-status/info-update)))
 
 (provide 'tdd-status-mode-line)
 

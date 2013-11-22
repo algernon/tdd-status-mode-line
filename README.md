@@ -29,12 +29,12 @@ The package defines three global key bindings:
  * `C-x t p` steps the state back (from *PASS* to *FAIL*, etc).
  * `C-x t c` clears the state and hides the widget.
 
-Apart from this, the package provides a `tdd-status-make-local`
+Apart from this, the package provides a `tdd-status/make-local`
 interactive command, with which one can make the TDD state buffer
 local. By default, this is not bound to any key. If one wants this to
 be the default, use it like this in the appropriate emacs init file:
 
 ```lisp
 (require 'tdd-status-mode-line)
-(tdd-status-make-local)
+(tdd-status/make-local)
 ```
