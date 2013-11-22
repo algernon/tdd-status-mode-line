@@ -5,7 +5,6 @@
 ;; Author: Gergely Nagy <algernon@madhouse-project.org>
 ;; URL: https://github.com/algernon/tdd-status-mode-line
 ;; Version: 0.1.1
-;; Package-Requires: ((emacs "23.1"))
 ;; Keywords: faces tdd
 ;; Prefix: tdd-status
 ;; Separator: /
