@@ -1,0 +1,41 @@
+language: emacs-lisp
+
+env:
+  matrix:
+    - EMACS=emacs23
+    - EMACS=emacs24
+    - EMACS=emacs-snapshot
+
+matrix:
+  allow_failures:
+    - env: EMACS=emacs-snapshot
+
+install:
+  - if [ "$EMACS" = "emacs23" ]; then
+        sudo apt-get -qq update &&
+        sudo apt-get -qq -f install &&
+        sudo apt-get -qq install emacs23-gtk emacs23-el;
+    fi
+  - if [ "$EMACS" = "emacs24" ]; then
+        sudo add-apt-repository -y ppa:cassou/emacs &&
+        sudo apt-get -qq update &&
+        sudo apt-get -qq -f install &&
+        sudo apt-get -qq install emacs24 emacs24-el;
+    fi
+  - if [ "$EMACS" = "emacs-snapshot" ]; then
+        sudo add-apt-repository -y ppa:cassou/emacs &&
+        sudo apt-get -qq update &&
+        sudo apt-get -qq -f install &&
+        sudo apt-get -qq install emacs-snapshot &&
+        sudo apt-get -qq install emacs-snapshot-el emacs-snapshot-gtk;
+    fi
+
+before_script:
+  - if [ "$EMACS" = "emacs-snapshot" ]; then
+        make downloads-latest;
+    else
+        make downloads;
+    fi
+
+script:
+  $EMACS --version && make test EMACS="$EMACS"
