@@ -27,6 +27,7 @@
 
 (require 'custom)
 (require 'cus-face)
+(require 'cl-lib)
 (require 'ert)
 
 ;; Customisation groups
@@ -78,11 +79,11 @@
 available states."
 
   (when (and (>= tdd-status/current-status-index 0)
-             (first (nth tdd-status/current-status-index
-                         tdd-status/states)))
-    (propertize (concat " [" (first (nth tdd-status/current-status-index tdd-status/states)) "] ")
-                'face (second (nth tdd-status/current-status-index
-                                   tdd-status/states)))))
+             (car (nth tdd-status/current-status-index
+                       tdd-status/states)))
+    (propertize (concat " [" (car (nth tdd-status/current-status-index tdd-status/states)) "] ")
+                'face (cadr (nth tdd-status/current-status-index
+                                 tdd-status/states)))))
 
 (defun tdd-status/advance ()
   "Advance the TDD status further."
@@ -90,7 +91,7 @@ available states."
 
   (if (>= tdd-status/current-status-index (1- (length tdd-status/states)))
       (setq tdd-status/current-status-index 0)
-    (incf tdd-status/current-status-index))
+    (cl-incf tdd-status/current-status-index))
   (force-mode-line-update)
   tdd-status/current-status-index)
 
@@ -100,7 +101,7 @@ available states."
 
   (if (<= tdd-status/current-status-index 0)
       (setq tdd-status/current-status-index (1- (length tdd-status/states)))
-    (decf tdd-status/current-status-index))
+    (cl-decf tdd-status/current-status-index))
   (force-mode-line-update)
   tdd-status/current-status-index)
 
