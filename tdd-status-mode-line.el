@@ -113,12 +113,6 @@ available states."
   (force-mode-line-update)
   tdd-status/current-status-index)
 
-(defun tdd-status/make-local ()
-  (interactive)
-  "Make the TDD status buffer-local."
-
-  (make-variable-buffer-local 'tdd-status/current-status-index))
-
 ;; Key bindings
 
 (defvar tdd-status-map nil
