@@ -88,8 +88,7 @@ available states."
   "Advance the TDD status further."
   (interactive)
 
-  (if (>= tdd-status/current-status-index (- (length
-                                              tdd-status/states) 1))
+  (if (>= tdd-status/current-status-index (1- (length tdd-status/states)))
       (setq tdd-status/current-status-index 0)
     (incf tdd-status/current-status-index)))
 
@@ -98,8 +97,7 @@ available states."
   (interactive)
 
   (if (<= tdd-status/current-status-index 0)
-      (setq tdd-status/current-status-index (- (length
-                                                tdd-status/states) 1))
+      (setq tdd-status/current-status-index (1- (length tdd-status/states)))
     (decf tdd-status/current-status-index)))
 
 (defun tdd-status-clear ()
