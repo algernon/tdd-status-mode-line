@@ -21,11 +21,13 @@ simply requiring it is all you need. The package adds the TDD status
 to `mode-line-misc-info`, you need to have that in your mode-line for
 the package to work.
 
-The package is also available from [Marmalade](http://marmalade-repo.org/):
+The package is also available from [Marmalade](http://marmalade-repo.org/)
+and [MELPA](http://melpa.milkbox.net/):
 
 ```lisp
 (require 'package)
-(add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
+(add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/")) ;; one or both
+(add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/"))      ;; of these lines
 (package-initialize)
 (package-install 'tdd-status-mode-line)
 
