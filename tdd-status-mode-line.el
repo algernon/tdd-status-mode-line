@@ -27,7 +27,6 @@
 
 (require 'custom)
 (require 'cus-face)
-(require 'cl-lib)
 (require 'easy-mmode)
 
 ;; Customisation groups
@@ -92,7 +91,7 @@ available states."
 
   (if (>= tdd-status/current-status-index (1- (length tdd-status/states)))
       (setq tdd-status/current-status-index 0)
-    (cl-incf tdd-status/current-status-index))
+    (setq tdd-status/current-status-index (1+ tdd-status/current-status-index)))
   (force-mode-line-update)
   tdd-status/current-status-index)
 
@@ -103,7 +102,7 @@ available states."
 
   (if (<= tdd-status/current-status-index 0)
       (setq tdd-status/current-status-index (1- (length tdd-status/states)))
-    (cl-decf tdd-status/current-status-index))
+    (setq tdd-status/current-status-index (1- tdd-status/current-status-index)))
   (force-mode-line-update)
   tdd-status/current-status-index)
 
