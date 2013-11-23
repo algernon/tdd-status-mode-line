@@ -7,7 +7,6 @@
 ;; Version: 0.1.1
 ;; Keywords: faces tdd
 ;; Prefix: tdd-status
-;; Package-Requires: ((ert "0"))
 ;; Separator: /
 
 ;;; License:
@@ -29,7 +28,6 @@
 (require 'custom)
 (require 'cus-face)
 (require 'cl-lib)
-(require 'ert)
 
 ;; Customisation groups
 
@@ -130,36 +128,6 @@ available states."
     (setq tdd-status-map map)))
 
 (define-key global-map (kbd "C-x t") tdd-status-map)
-
-;; Tests
-
-(ert-deftest test-tdd-status/advance ()
-  "Tests that tdd-status/advance functions correctly."
-
-  ;; Start with a clean slate
-  (setq tdd-status/current-status-index -1)
-
-  (should (= (tdd-status/advance) 0))
-  (should (= (tdd-status/advance) 1))
-  (should (= (tdd-status/advance) 2))
-  (should (= (tdd-status/advance) 0)))
-
-(ert-deftest test-tdd-status/back ()
-  "Tests that tdd-status/back functions correctly."
-
-  ;; Start with a clean slate
-  (setq tdd-status/current-status-index -1)
-  (should (= (tdd-status/back) 2))
-  (should (= (tdd-status/back) 1))
-  (should (= (tdd-status/back) 0))
-  (should (= (tdd-status/back) 2)))
-
-(ert-deftest test-tdd-status/clear ()
-  "Tests that tdd-status/clear functions properly."
-
-  ;; Start with an unclean state
-  (setq tdd-status/current-status-index 1)
-  (should (= (tdd-status/clear) -1)))
 
 ;; Setup code
 
