@@ -24,8 +24,9 @@ and [MELPA](http://melpa.milkbox.net/):
 
 ```lisp
 (require 'package)
-(add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/")) ;; one or both
-(add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/"))      ;; of these lines
+;; Use one or both of the following two lines
+(add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
+(add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/"))
 (package-initialize)
 (package-install 'tdd-status-mode-line)
 
