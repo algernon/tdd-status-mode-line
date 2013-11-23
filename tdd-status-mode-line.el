@@ -7,6 +7,7 @@
 ;; Version: 0.1.1
 ;; Keywords: faces tdd
 ;; Prefix: tdd-status
+;; Package-Requires: ((ert "0"))
 ;; Separator: /
 
 ;;; License:
