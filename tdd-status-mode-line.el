@@ -85,6 +85,7 @@ available states."
                 'face (cadr (nth tdd-status/current-status-index
                                  tdd-status/states)))))
 
+;;;###autoload
 (defun tdd-status/advance ()
   "Advance the TDD status further."
   (interactive)
@@ -95,6 +96,7 @@ available states."
   (force-mode-line-update)
   tdd-status/current-status-index)
 
+;;;###autoload
 (defun tdd-status/back ()
   "Step back in the TDD status."
   (interactive)
@@ -105,6 +107,7 @@ available states."
   (force-mode-line-update)
   tdd-status/current-status-index)
 
+;;;###autoload
 (defun tdd-status/clear ()
   "Clear the TDD status."
   (interactive)
