@@ -28,6 +28,7 @@
 (require 'custom)
 (require 'cus-face)
 (require 'cl-lib)
+(require 'easy-mmode)
 
 ;; Customisation groups
 
@@ -122,16 +123,50 @@ available states."
 
 (unless tdd-status-map
   (let ((map (make-sparse-keymap)))
-    (define-key map (kbd "n") 'tdd-status/advance)
-    (define-key map (kbd "p") 'tdd-status/back)
-    (define-key map (kbd "c") 'tdd-status/clear)
+    (define-key map (kbd "C-x t n") 'tdd-status/advance)
+    (define-key map (kbd "C-x t p") 'tdd-status/back)
+    (define-key map (kbd "C-x t c") 'tdd-status/clear)
     (setq tdd-status-map map)))
-
-(define-key global-map (kbd "C-x t") tdd-status-map)
 
 ;; Setup code
 
-(add-to-list 'mode-line-misc-info '(:eval (tdd-status/info-update)))
+;;;###autoload
+(define-minor-mode tdd-status-minor-mode
+  "Toggle the TDD status minor mode.
+
+In this mode, the current TDD state will be displayed on the
+mode-line, and the state is tracked on a per-buffer basis.
+Switching between `tdd-status-global-mode' and
+`tdd-status-minor-mode' is not supported."
+
+  :lighter " TDD"
+  :keymap tdd-status-map
+
+  (make-local-variable 'tdd-status/current-status-index)
+  (if tdd-status-minor-mode
+      (setq global-mode-string
+            (remove '(:eval (tdd-status/info-update)) global-mode-string))
+    (add-to-list 'mode-line-misc-info
+                 '(:eval (tdd-status/info-update)))))
+
+;;;###autoload
+(define-minor-mode tdd-status-global-mode
+  "Toggle the global TDD status minor mode.
+
+In this mode, the current TDD state will be displayed on the
+mode-line, and the state is tracked globally. Switching between
+`tdd-status-global-mode' and `tdd-status-minor-mode' is not
+supported."
+
+  :lighter " TDD"
+  :keymap tdd-status-map
+  :global t
+
+  (if tdd-status-global-mode
+      (setq global-mode-string
+            (remove '(:eval (tdd-status/info-update)) global-mode-string))
+    (add-to-list 'mode-line-misc-info
+                 '(:eval (tdd-status/info-update)))))
 
 (provide 'tdd-status-mode-line)
 

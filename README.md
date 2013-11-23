@@ -17,9 +17,7 @@ Installation
 
 Once the package is downloaded, either via a git checkout or simply
 saving the `tdd-status-mode-line.el` file somewhere on your load path,
-simply requiring it is all you need. The package adds the TDD status
-to `mode-line-misc-info`, you need to have that in your mode-line for
-the package to work.
+simply require it and enable one of the two minor modes it provides.
 
 The package is also available from [Marmalade](http://marmalade-repo.org/)
 and [MELPA](http://melpa.milkbox.net/):
@@ -37,18 +35,32 @@ and [MELPA](http://melpa.milkbox.net/):
 Usage
 -----
 
-The package defines three global key bindings:
+The package defines two minor modes, only one of which should be
+enabled at a time, and switching between them is not supported. Both
+of them provide the same key bindings:
 
  * `C-x t n` advances the state (from none to *FAIL*, then to *PASS*
    and onto *REFACTOR*, and finally back to *FAIL*).
  * `C-x t p` steps the state back (from *PASS* to *FAIL*, etc).
  * `C-x t c` clears the state and hides the widget.
 
-By default, the TDD state is global. If one wants to make it buffer
-local, the `tdd-status/current-status-index` variable needs to be made
-buffer local:
+The two minor modes are `tdd-status-minor-mode` and
+`tdd-status-global-mode`, where the first enables the mode for the
+current buffer only and will track the TDD state on a per-buffer basis
+from that point on; the second enables the mode globally, with global
+tracking.
+
+To use the buffer-local mode of operation, place something like this
+in your init file:
 
 ```lisp
 (require 'tdd-status-mode-line)
-(make-variable-buffer-local 'tdd-status/current-status-index)
+(add-hook 'prog-mode-hook 'tdd-status-minor-mode)
+```
+
+To enable it globally, use something like the following:
+
+```lisp
+(require 'tdd-status-mode-line)
+(tdd-status-global-mode)
 ```
