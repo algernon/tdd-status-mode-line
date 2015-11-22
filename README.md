@@ -20,13 +20,13 @@ saving the `tdd-status-mode-line.el` file somewhere on your load path,
 simply require it and enable one of the two minor modes it provides.
 
 The package is also available from [Marmalade](http://marmalade-repo.org/)
-and [MELPA](http://melpa.milkbox.net/):
+and [MELPA](https://melpa.org/):
 
 ```lisp
 (require 'package)
 ;; Use one or both of the following two lines
 (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
-(add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/"))
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
 (package-initialize)
 (package-install 'tdd-status-mode-line)
 
