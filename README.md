@@ -2,6 +2,7 @@ TDD status mode-line widget
 ===========================
 
 [![Build Status](https://travis-ci.org/algernon/tdd-status-mode-line.png?branch=master)](https://travis-ci.org/algernon/tdd-status-mode-line)
+[![MELPA](https://melpa.org/packages/tdd-status-mode-line-badge.svg)](https://melpa.org/#/tdd-status-mode-line)
 
 This little package implements a mode-line widget to track one's
 current test-driven development state (*FAIL*, *PASS*, or *REFACTOR*).
